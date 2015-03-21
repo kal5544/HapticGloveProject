@@ -11,16 +11,16 @@ public class ObjectCreator : MonoBehaviour {
 	public void CreateObject(string prefab)
 	{
 		if (lastCreated != null) {
-			lastCreated.renderer.material.shader = previousShader;
+			lastCreated.GetComponent<Renderer>().material.shader = previousShader;
 			newObj = Resources.Load (prefab);
 			lastCreated = (GameObject)Instantiate(newObj, new Vector3(0,9,0), Quaternion.identity);
-			previousShader = lastCreated.renderer.material.shader;
-			lastCreated.renderer.material.shader = outlineShader;
+			previousShader = lastCreated.GetComponent<Renderer>().material.shader;
+			lastCreated.GetComponent<Renderer>().material.shader = outlineShader;
 		} else {
 			newObj = Resources.Load (prefab);
 			lastCreated = (GameObject)Instantiate (newObj, new Vector3 (0, 9, 0), Quaternion.identity);
-			previousShader = lastCreated.renderer.material.shader;
-			lastCreated.renderer.material.shader = outlineShader;
+			previousShader = lastCreated.GetComponent<Renderer>().material.shader;
+			lastCreated.GetComponent<Renderer>().material.shader = outlineShader;
 		}
 	}
 }
