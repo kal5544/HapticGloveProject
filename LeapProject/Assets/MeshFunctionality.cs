@@ -7,65 +7,54 @@ public class MeshFunctionality : MonoBehaviour {
 
 	private MeshFilter meshFilter;
 	private Mesh mesh;
-	private Color[] vertexColors;
-	private Color previousVertexColor;
-	private Color highlightVertexColor = Color.red;
 
-	void Update()
+	public void ModifyMesh(Collision coll)
 	{
-		if (objectCreatorRef.lastCreated != null && meshFilter != objectCreatorRef.lastCreated.GetComponent<MeshFilter> ()) 
+
+		meshFilter = coll.gameObject.GetComponent<MeshFilter> ();
+		mesh = meshFilter.mesh;
+
+		float minDistanceSqr = Mathf.Infinity;
+		Vector3 closestVertex = Vector3.zero;
+		int closestVertexNum = 0;
+		Vector3[] vertices = mesh.vertices;
+
+		// scan all vertices to find nearest
+		for(int i =0; i < vertices.Length; i++)
 		{
-			meshFilter = objectCreatorRef.lastCreated.GetComponent<MeshFilter> ();
-			mesh = meshFilter.mesh;
-			vertexColors = mesh.colors;
-			Debug.Log("vertex color before change: " + vertexColors[0]);
-			for(int i = 0; i < (int)(vertexColors.Length / 2); ++i)
+			Vector3 diff = coll.contacts[0].point-vertices[i];
+			float distSqr = diff.sqrMagnitude;
+			
+			if (distSqr < minDistanceSqr)
 			{
-				vertexColors[i] = highlightVertexColor;
+				minDistanceSqr = distSqr;
+				closestVertex = vertices[i];
+				closestVertexNum = i;
 			}
-			mesh.colors = vertexColors;
-			Debug.Log("vertex color after change: " + vertexColors[0]);
 		}
 
-/*
-		if (highlightedObject == null && objectCreatorRef.lastCreated != null) 
-		{
-			highlightedObject = objectCreatorRef.lastCreated;
-			highlightedObjectMesh = highlightedObject.GetComponent<MeshFilter>().mesh;
-			previousVertexColor = highlightedObjectMesh.colors[0];
-			vertexColors = highlightedObjectMesh.colors;
+		Debug.Log ("old vertex point: " + closestVertex);
+		Debug.Log ("collision normal: " + coll.contacts [0].normal);
+		closestVertex -= coll.contacts [0].normal*0.1f;
 
-			for(int i = 0; i < vertexColors.Length; i++)
-			{
-				vertexColors[i] = highlightVertexColor;
-			}
+		//closestVertex = 2 * closestVertex;
+		Debug.Log ("new vertex point: " + closestVertex); 
+		vertices [closestVertexNum] = closestVertex;
+		mesh.vertices = vertices;
+		meshFilter.gameObject.GetComponent<MeshCollider> ().sharedMesh = null;
+		meshFilter.gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
+	}
 
-			highlightedObjectMesh.colors = vertexColors;
+	public void GrowMesh()
+	{
+		meshFilter = objectCreatorRef.lastCreated.GetComponent<MeshFilter> ();
+		mesh = meshFilter.mesh;
+		Vector3[] vertices = mesh.vertices;
+		for(int i = 0; i < vertices.Length; i++) {
+			vertices[i] += mesh.normals[i];
 		}
-
-		if (objectCreatorRef.lastCreated != highlightedObject) 
-		{
-			for(int i = 0; i < vertexColors.Length; i++) 
-			{
-				vertexColors [i] = previousVertexColor;
-			}
-
-			highlightedObjectMesh.colors = vertexColors;
-			highlightedObject.GetComponent<MeshFilter>().mesh = highlightedObjectMesh;
-
-
-			highlightedObject = objectCreatorRef.lastCreated;
-			highlightedObjectMesh = highlightedObject.GetComponent<MeshFilter>().mesh;
-			previousVertexColor = highlightedObjectMesh.colors[0];
-			vertexColors = highlightedObjectMesh.colors;
-			for(int i = 0; i < vertexColors.Length; i++)
-			{
-				vertexColors [i] = highlightVertexColor;
-			}
-			highlightedObjectMesh.colors = vertexColors;
-			highlightedObject.GetComponent<MeshFilter>().mesh = highlightedObjectMesh;
-			Debug.Log("changed vertex colors");
-		}
-		*/
+		mesh.vertices = vertices;
+		meshFilter.gameObject.GetComponent<MeshCollider> ().sharedMesh = null;
+		meshFilter.gameObject.GetComponent<MeshCollider> ().sharedMesh = mesh;
 	}
 }

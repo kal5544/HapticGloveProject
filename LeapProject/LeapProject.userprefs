@@ -1,8 +1,8 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="..\MasterUISystem\MasterUISystemProject\Assets\MiniMap\MiniMapManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\PrintCollisions.cs">
     <Files>
-      <File FileName="..\MasterUISystem\MasterUISystemProject\Assets\MiniMap\MiniMapManager.cs" Line="106" Column="55" />
+      <File FileName="Assets\PrintCollisions.cs" Line="5" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
