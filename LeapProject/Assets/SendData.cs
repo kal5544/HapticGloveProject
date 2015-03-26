@@ -6,30 +6,37 @@ using System.Threading;
 public class SendData : MonoBehaviour 
 {
 	//Setup parameters to connect to Arduino
-	public static SerialPort sp = new SerialPort("COM4", 9600, Parity.None, 8, StopBits.One);
+	public static SerialPort sp = new SerialPort("COM6", 9600, Parity.None, 8, StopBits.One);
 	public static string strIn;        
-	
+
+	private int motorPin = 2;
+	private byte[] motorOn = new byte[]{2, 255};
 	// Use this for initialization
 	void Start () 
 	{
 		OpenConnection();
 	}
-	
-	void Update()
-	{
-		//Read incoming data
 
-		strIn = sp.ReadLine ();
-		Debug.Log (strIn);
-		//You can also send data like this
-		//sp.Write("1");
-		
-		
-	}
-
-	public void SendHello()
+	public void ToggleMotor()
 	{
-		sp.Write ("Hello");
+		Debug.Log ("Sent: " + motorOn);
+		sp.Write(motorOn,0,2);
+		if (motorOn[1] == (byte)255) 
+		{
+			motorOn[1] = (byte)0;
+		} 
+		else 
+		{
+			motorOn[1] = (byte)255;
+		}
+
+		if (motorOn [1] == (byte)255) 
+		{
+			motorOn [0] = (byte)(motorPin++);
+			if (motorPin > (byte)6)
+				motorPin = (byte)2;
+		}
+
 	}
 	
 	//Function connecting to Arduino
