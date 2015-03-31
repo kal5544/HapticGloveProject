@@ -7,16 +7,17 @@ public class PrintCollisions : MonoBehaviour {
 
 	//Setup parameters to connect to Arduino
 	public static SerialPort sp = new SerialPort("COM6", 9600, Parity.None, 8, StopBits.One);
-	public int motorPin = 2;
+	public int motorPin;
 
 	private string debugString = "";
 
-	private byte[] motorOn = new byte[]{2, 255};
+	private byte[] motorOn = new byte[2];
 
 	void Start()
 	{
+		Debug.Log (motorPin);
+		motorOn = new byte[]{(byte)motorPin, 255};
 		OpenConnection ();
-		motorOn [0] = (byte)motorPin;
 	}
 
 	void OnCollisionEnter(Collision coll)
@@ -24,7 +25,7 @@ public class PrintCollisions : MonoBehaviour {
 		//Debug.Log ("modifying mesh");
 		//GameObject.Find ("HandControllerSandBox").GetComponent<MeshFunctionality> ().ModifyMesh (coll);
 		motorOn [1] = (byte)255;
-		Debug.Log ("Motor Magnitude: " + (int)motorOn [1]);
+		Debug.Log ("Motor Pin: " + (int)motorOn[0] + ", Motor Magnitude: " + (int)motorOn [1]);
 		sp.Write (motorOn, 0, 2);
 
 	}
@@ -32,7 +33,7 @@ public class PrintCollisions : MonoBehaviour {
 	void OnCollisionExit(Collision coll)
 	{
 		motorOn [1] = (byte)0;
-		Debug.Log ("Motor Magnitude: " + (int)motorOn [1]);
+		Debug.Log ("Motor Pin: " + (int)motorOn[0] + ", Motor Magnitude: " + (int)motorOn [1]);
 		sp.Write (motorOn, 0, 2);
 
 	}
@@ -40,7 +41,7 @@ public class PrintCollisions : MonoBehaviour {
 	void OnCollisionStay(Collision coll)
 	{
 		debugString = gameObject.name + " in contact with " + coll.gameObject.name + " with force: " + Vector3.Dot (coll.contacts[0].normal, coll.relativeVelocity)*coll.rigidbody.mass;
-		Debug.Log (debugString);
+		//Debug.Log (debugString);
 	}
 
 
