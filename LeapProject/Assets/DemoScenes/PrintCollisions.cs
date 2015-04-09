@@ -56,7 +56,8 @@ public class PrintCollisions : MonoBehaviour {
 
 	void OnCollisionStay(Collision coll)
 	{
-		forceMagnitude = Vector3.Dot(coll.contacts[0].normal, coll.relativeVelocity)*coll.rigidbody.mass;
+		forceMagnitude = Vector3.Dot(coll.contacts[0].normal, coll.relativeVelocity)*coll.rigidbody.mass*10;
+		Debug.Log ("force magnitude: " + forceMagnitude);
 		forceMagnitude = Mathf.Abs ((int)forceMagnitude);
 		if (forceMagnitude > 100) {
 			forceMagnitude = 100;
@@ -64,8 +65,14 @@ public class PrintCollisions : MonoBehaviour {
 		force_vib = (int)Mathf.Floor ((forceCoeff * forceMagnitude)+100);
 		debugString = gameObject.name + " in contact with " + coll.gameObject.name + " with force: " + forceMagnitude;
 		Debug.Log (debugString);
+		motorOn [1] = (byte)force_vib;
 	}
 
+	void OnDestroy()
+	{
+		motorOn [1] = (byte)0;
+		sp.Write (motorOn, 0, 2);
+	}
 
 	//Function connecting to Arduino
 	public void OpenConnection() 
