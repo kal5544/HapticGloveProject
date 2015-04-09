@@ -11,14 +11,24 @@ public class PrintCollisions : MonoBehaviour {
 
 	private string debugString = "";
 
+	//[0] is pin, [1] is data
 	private byte[] motorOn = new byte[2];
 	private bool meshEdited = false;
+
+	private float forceMagnitude = 0;
+	//Force to be sent to vibrating motor
+	private int force_vib = 0;
+	//Force to be sent to servo
+	private int force_servo = 0;
+	//(num range of motor)/(max force)
+	const float forceCoeff = (155/100);
 
 	void Start()
 	{
 		//Debug.Log (motorPin);
 		motorOn = new byte[]{(byte)motorPin, 1};
 		OpenConnection ();
+		sp.ReadTimeout = 1;
 	}
 
 	void OnCollisionEnter(Collision coll)
@@ -46,8 +56,14 @@ public class PrintCollisions : MonoBehaviour {
 
 	void OnCollisionStay(Collision coll)
 	{
-		debugString = gameObject.name + " in contact with " + coll.gameObject.name + " with force: " + Vector3.Dot (coll.contacts[0].normal, coll.relativeVelocity)*coll.rigidbody.mass;
-		//Debug.Log (debugString);
+		forceMagnitude = Vector3.Dot(coll.contacts[0].normal, coll.relativeVelocity)*coll.rigidbody.mass;
+		forceMagnitude = Mathf.Abs ((int)forceMagnitude);
+		if (forceMagnitude > 100) {
+			forceMagnitude = 100;
+		}
+		force_vib = (int)Mathf.Floor ((forceCoeff * forceMagnitude)+100);
+		debugString = gameObject.name + " in contact with " + coll.gameObject.name + " with force: " + forceMagnitude;
+		Debug.Log (debugString);
 	}
 
 
