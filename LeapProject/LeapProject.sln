@@ -5,6 +5,8 @@ Project("{DDB7AB14-0744-BF2F-1661-A103A71E9208}") = "LeapProject", "Assembly-CSh
 EndProject
 Project("{DDB7AB14-0744-BF2F-1661-A103A71E9208}") = "LeapProject", "Assembly-CSharp-Editor.csproj", "{F5188E61-A39A-F129-EC30-6AB059FDB0E4}"
 EndProject
+Project("{DDB7AB14-0744-BF2F-1661-A103A71E9208}") = "LeapProject", "Assembly-UnityScript.unityproj", "{5093EEAC-9F52-76AD-845A-19F2D2D9BE8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,11 +21,15 @@ Global
 		{F5188E61-A39A-F129-EC30-6AB059FDB0E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5188E61-A39A-F129-EC30-6AB059FDB0E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5188E61-A39A-F129-EC30-6AB059FDB0E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5093EEAC-9F52-76AD-845A-19F2D2D9BE8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5093EEAC-9F52-76AD-845A-19F2D2D9BE8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5093EEAC-9F52-76AD-845A-19F2D2D9BE8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5093EEAC-9F52-76AD-845A-19F2D2D9BE8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																	GlobalSection(MonoDevelopProperties) = preSolution
+																																																	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
