@@ -16,7 +16,7 @@ public class PrintCollisions : MonoBehaviour {
 
 	void Start()
 	{
-		Debug.Log (motorPin);
+		//Debug.Log (motorPin);
 		motorOn = new byte[]{(byte)motorPin, 1};
 		OpenConnection ();
 	}

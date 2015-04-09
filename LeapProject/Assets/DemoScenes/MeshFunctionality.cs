@@ -29,6 +29,8 @@ public class MeshFunctionality : MonoBehaviour {
 	{
 		if (meshEditMode) 
 		{
+			Vector3 collisionPoint = coll.contacts[0].otherCollider.transform.InverseTransformPoint(coll.contacts[0].point);
+
 			meshFilter = coll.gameObject.GetComponent<MeshFilter> ();
 			mesh = meshFilter.mesh;
 
@@ -37,10 +39,12 @@ public class MeshFunctionality : MonoBehaviour {
 			int closestVertexNum = 0;
 			Vector3[] vertices = mesh.vertices;
 
+			Debug.Log("collision point " + collisionPoint);
 			// scan all vertices to find nearest
 			for (int i = 0; i < vertices.Length; i++) 
 			{
-				Vector3 diff = coll.contacts [0].point - vertices [i];
+
+				Vector3 diff = collisionPoint - vertices [i];
 				float distSqr = diff.sqrMagnitude;
 			
 				if (distSqr < minDistanceSqr) 
@@ -50,17 +54,15 @@ public class MeshFunctionality : MonoBehaviour {
 					closestVertexNum = i;
 				}
 			}
-			//Debug.Log ("old vertex point: " + closestVertex);
-			//Debug.Log ("collision normal: " + coll.contacts [0].normal);
-			closestVertex -= coll.contacts [0].normal * 0.1f;
 
-			//closestVertex = 2 * closestVertex;
-			//Debug.Log ("new vertex point: " + closestVertex); 
+			closestVertex -= transform.InverseTransformDirection(coll.contacts [0].normal) * 0.01f;
+
 			vertices [closestVertexNum] = closestVertex;
 			mesh.vertices = vertices;
 			meshFilter.gameObject.GetComponent<MeshCollider> ().sharedMesh = null;
 			meshFilter.gameObject.GetComponent<MeshCollider> ().sharedMesh = mesh;
 			coll.transform.eulerAngles = Vector3.zero;
+			coll.transform.position = new Vector3(0,3.3f,0);
 		}
 		return meshEditMode;
 	}
