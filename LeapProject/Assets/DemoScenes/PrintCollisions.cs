@@ -38,12 +38,12 @@ public class PrintCollisions : MonoBehaviour {
 	{
 		//Debug.Log ("modifying mesh");
 		meshEdited = GameObject.Find ("HandControllerSandBox").GetComponent<MeshFunctionality> ().ModifyMesh (coll);
-		if(!meshEdited)
-		{
-			motorOn [1] = (byte)255;
+		//if(!meshEdited)
+		//{
+			//motorOn [1] = (byte)255;
 			//Debug.Log ("Motor Pin: " + (int)motorOn [0] + ", Motor Magnitude: " + (int)motorOn [1]);
 			//sp.Write (motorOn, 0, 2);
-		}
+		//}
 
 	}
 

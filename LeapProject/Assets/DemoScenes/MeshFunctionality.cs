@@ -8,15 +8,21 @@ public class MeshFunctionality : MonoBehaviour {
 
 	private MeshFilter meshFilter;
 	private Mesh mesh;
+	private Vector3[] storedObjPos, storedObjRot;
 
 	public void ToggleMeshEditMode()
 	{
+		storedObjPos = new Vector3[objectCreatorRef.createdObjectRoot.transform.childCount];
+		storedObjRot = new Vector3[objectCreatorRef.createdObjectRoot.transform.childCount];
+
 		meshEditMode = !meshEditMode;
 		for (int i = 0; i < objectCreatorRef.createdObjectRoot.transform.childCount; i++) 
 		{
 			if(meshEditMode)
 			{
 				objectCreatorRef.createdObjectRoot.transform.GetChild(i).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+				storedObjPos[i] = objectCreatorRef.createdObjectRoot.transform.GetChild(i).transform.position;
+				storedObjRot[i] = objectCreatorRef.createdObjectRoot.transform.GetChild(i).transform.eulerAngles;
 			}
 			else
 			{
@@ -29,6 +35,13 @@ public class MeshFunctionality : MonoBehaviour {
 	{
 		if (meshEditMode) 
 		{
+			int childIndex = 0;
+			for (int i = 0; i < objectCreatorRef.createdObjectRoot.transform.childCount; i++) 
+			{
+				if(coll.gameObject == objectCreatorRef.createdObjectRoot.transform.GetChild(i))
+					childIndex = i;
+			}
+
 			Vector3 collisionPoint = coll.contacts[0].otherCollider.transform.InverseTransformPoint(coll.contacts[0].point);
 
 			meshFilter = coll.gameObject.GetComponent<MeshFilter> ();
@@ -55,14 +68,15 @@ public class MeshFunctionality : MonoBehaviour {
 				}
 			}
 
-			closestVertex -= transform.InverseTransformDirection(coll.contacts [0].normal) * 0.01f;
+			closestVertex -= transform.InverseTransformDirection(coll.contacts [0].normal) * 0.02f;
 
 			vertices [closestVertexNum] = closestVertex;
 			mesh.vertices = vertices;
 			meshFilter.gameObject.GetComponent<MeshCollider> ().sharedMesh = null;
 			meshFilter.gameObject.GetComponent<MeshCollider> ().sharedMesh = mesh;
-			coll.transform.eulerAngles = Vector3.zero;
-			coll.transform.position = new Vector3(0,3.3f,0);
+
+			coll.transform.eulerAngles = storedObjRot[childIndex];
+			coll.transform.position = storedObjPos[childIndex];
 		}
 		return meshEditMode;
 	}
