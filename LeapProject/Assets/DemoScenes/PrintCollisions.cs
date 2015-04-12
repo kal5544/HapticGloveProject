@@ -20,11 +20,14 @@ public class PrintCollisions : MonoBehaviour {
 	private int force_vib = 0;
 	//Force to be sent to servo
 	private int force_servo = 0;
+	// maximum force from collisions
+	private int maxForce = 15;
 	//(num range of motor)/(max force)
-	const float forceCoeff = (155/100);
+	private float forceCoeff;
 
 	void Start()
 	{
+		forceCoeff = 155 / maxForce;
 		//Debug.Log (motorPin);
 		motorOn = new byte[]{(byte)motorPin, 1};
 		OpenConnection ();
@@ -39,7 +42,7 @@ public class PrintCollisions : MonoBehaviour {
 		{
 			motorOn [1] = (byte)255;
 			//Debug.Log ("Motor Pin: " + (int)motorOn [0] + ", Motor Magnitude: " + (int)motorOn [1]);
-			sp.Write (motorOn, 0, 2);
+			//sp.Write (motorOn, 0, 2);
 		}
 
 	}
@@ -49,23 +52,26 @@ public class PrintCollisions : MonoBehaviour {
 		if (!meshEdited) {
 			motorOn [1] = (byte)0;
 			//Debug.Log ("Motor Pin: " + (int)motorOn [0] + ", Motor Magnitude: " + (int)motorOn [1]);
-			sp.Write (motorOn, 0, 2);
+			//sp.Write (motorOn, 0, 2);
 		}
 
 	}
 
 	void OnCollisionStay(Collision coll)
 	{
-		forceMagnitude = Vector3.Dot(coll.contacts[0].normal, coll.relativeVelocity)*coll.rigidbody.mass*10;
-		Debug.Log ("force magnitude: " + forceMagnitude);
-		forceMagnitude = Mathf.Abs ((int)forceMagnitude);
-		if (forceMagnitude > 100) {
-			forceMagnitude = 100;
+		forceMagnitude = Vector3.Dot(coll.contacts[0].normal, coll.relativeVelocity)*coll.rigidbody.mass;
+	
+		Debug.Log ("raw force magnitude: " + forceMagnitude);
+		forceMagnitude = Mathf.Abs (forceMagnitude);
+		if (forceMagnitude > maxForce) {
+			forceMagnitude = maxForce;
 		}
 		force_vib = (int)Mathf.Floor ((forceCoeff * forceMagnitude)+100);
-		debugString = gameObject.name + " in contact with " + coll.gameObject.name + " with force: " + forceMagnitude;
-		Debug.Log (debugString);
+		//debugString = gameObject.name + " in contact with " + coll.gameObject.name + " with force: " + forceMagnitude;
+		//Debug.Log (debugString);
+		Debug.Log("force vibrating motor: " + force_vib);
 		motorOn [1] = (byte)force_vib;
+		sp.Write (motorOn, 0, 2);
 	}
 
 	void OnDestroy()
