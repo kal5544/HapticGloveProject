@@ -46,38 +46,38 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\LeapStuff\LeapMotion\Editor\HandControllerEditor.cs" />
-     <Compile Include="Assets\LeapStuff\OVR\Editor\OVRBuild.cs" />
-     <Compile Include="Assets\LeapStuff\OVR\Editor\OVRGameView.cs" />
-     <Compile Include="Assets\LeapStuff\OVR\Editor\OVRPrefabs.cs" />
-     <Compile Include="Assets\LeapStuff\OVR\Editor\OVRShimLoader.cs" />
-     <None Include="Assets\LeapStuff\LeapMotion\Resources\LeapIRUndistorted.shader" />
-     <None Include="Assets\LeapStuff\Plugins\donotdelete.txt" />
-     <None Include="Assets\LeapStuff\LeapMotion\Materials\Sources\Shaders\Toony-Basic.shader" />
-     <None Include="Assets\LeapStuff\LeapMotion\Resources\LeapIRDistorted.shader" />
-     <None Include="Assets\LeapStuff\Resources\Wireframe.shader" />
-     <None Include="Assets\LeapStuff\LeapMotion\Resources\LeapRGBDistorted.shader" />
-     <None Include="Assets\LeapStuff\Plugins\x86_64\donotdelete.txt" />
-     <None Include="Assets\LeapStuff\Resources\OutlineObject.shader" />
-     <None Include="Assets\LeapStuff\LeapMotion\InteractionUtils (alpha)\readme.txt" />
-     <None Include="Assets\LeapStuff\LeapMotion\Resources\LeapIRUndistorted_foreground.shader" />
-     <None Include="Assets\LeapStuff\LeapMotion\DemoResources\ScrollerText.txt" />
-     <None Include="Assets\LeapStuff\LeapMotion\readme.txt" />
-     <None Include="Assets\LeapStuff\OVR\Shaders\TextShader3D.shader" />
-     <None Include="Assets\LeapStuff\LeapMotion\Shaders\RimShading.shader" />
-     <None Include="Assets\LeapStuff\Resources\$vertexcoloredoutline_133.shader" />
-     <None Include="Assets\LeapStuff\LeapMotion\Materials\Sources\Shaders\Toony-BasicOutline.shader" />
-     <None Include="Assets\LeapStuff\LeapMotion\Materials\Sources\Shaders\Toony-LightedOutline.shader" />
-     <None Include="Assets\LeapStuff\LeapMotion\Materials\Sources\Shaders\Toony-Lighted.shader" />
+     <Compile Include="Assets\LeapMotion\Editor\HandControllerEditor.cs" />
+     <Compile Include="Assets\OVR\Editor\OVRBuild.cs" />
+     <Compile Include="Assets\OVR\Editor\OVRGameView.cs" />
+     <Compile Include="Assets\OVR\Editor\OVRPrefabs.cs" />
+     <Compile Include="Assets\OVR\Editor\OVRShimLoader.cs" />
+     <None Include="Assets\LeapMotion\Resources\LeapIRUndistorted.shader" />
+     <None Include="Assets\Plugins\donotdelete.txt" />
+     <None Include="Assets\LeapMotion\Materials\Sources\Shaders\Toony-Basic.shader" />
+     <None Include="Assets\LeapMotion\Resources\LeapIRDistorted.shader" />
+     <None Include="Assets\LeapMotion\Resources\LeapRGBDistorted.shader" />
+     <None Include="Assets\LeapMotion\README_BEFORE_UPDATING.txt" />
+     <None Include="Assets\Plugins\x86_64\donotdelete.txt" />
+     <None Include="Assets\LeapMotion\Resources\LeapIRUndistorted_foreground.shader" />
+     <None Include="Assets\LeapMotion\DemoResources\ScrollerText.txt" />
+     <None Include="Assets\LeapMotion\readme.txt" />
+     <None Include="Assets\OVR\Shaders\TextShader3D.shader" />
+     <None Include="Assets\LeapMotion\Shaders\RimShading.shader" />
+     <None Include="Assets\LeapMotion\Dependencies.txt" />
+     <None Include="Assets\LeapMotion\Materials\Sources\Shaders\Toony-BasicOutline.shader" />
+     <None Include="Assets\LeapMotion\Materials\Sources\Shaders\Toony-LightedOutline.shader" />
+     <None Include="Assets\LeapMotion\Materials\Sources\Shaders\Toony-Lighted.shader" />
      <None Include="Assets\Raw Mocap Data\Animations\_CompleteAnimationList.txt" />
-     <None Include="Assets\LeapStuff\OVR\Shaders\OVRGUIShader.shader" />
-     <None Include="Assets\LeapStuff\Plugins\x86\donotdelete.txt" />
-     <None Include="Assets\LeapStuff\LeapMotion\Resources\LeapRGBUndistorted.shader" />
+     <None Include="Assets\LeapMotion\CoreAssetVersion.txt" />
+     <None Include="Assets\OVR\Shaders\OVRGUIShader.shader" />
+     <None Include="Assets\Plugins\x86\donotdelete.txt" />
+     <None Include="Assets\LeapMotion\Resources\LeapRGBUndistorted.shader" />
+     <None Include="Assets\Plugins\SystemWipeRecognizerDll.bundle\Contents\MacOS\version.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="LeapCSharp.NET3.5">
- <HintPath>C:/Users/Kevin/Documents/GitHub/HapticGloveProject/LeapProject/Assets/LeapStuff/LeapCSharp.NET3.5.dll</HintPath>
+ <HintPath>C:/Users/Kevin/Documents/GitHub/HapticGloveProject/LeapProject/Assets/Plugins/LeapCSharp.NET3.5.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>

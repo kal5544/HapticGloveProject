@@ -1,10 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\DemoScenes\MeshFunctionality.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\LeapMotion\Resources\LeapRGBUndistorted.shader">
     <Files>
-      <File FileName="Assets\DemoScenes\MeshFunctionality.cs" Line="71" Column="89" />
-      <File FileName="Assets\DemoScenes\PrintCollisions.cs" Line="55" Column="31" />
-      <File FileName="Assets\DemoScenes\ObjectCreator.cs" Line="1" Column="1" />
+      <File FileName="Assets\LeapMotion+OVR\DemoResources\Scripts\RandomBlocksGenerator.cs" Line="85" Column="61" />
+      <File FileName="Assets\LeapMotion\Resources\LeapRGBUndistorted.shader" Line="123" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
