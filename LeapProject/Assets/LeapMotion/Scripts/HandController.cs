@@ -11,10 +11,14 @@ using Leap;
 // Overall Controller object that will instantiate hands and tools when they appear.
 public class HandController : MonoBehaviour {
 
+	private PrintConfidence pConf;
+
   // Reference distance from thumb base to pinky base in mm.
   protected const float GIZMO_SCALE = 5.0f;
   protected const float MM_TO_M = 0.001f;
 
+
+  
   public bool separateLeftRight = false;
   public HandModel leftGraphicsModel;
   public HandModel leftPhysicsModel;
@@ -36,7 +40,7 @@ public class HandController : MonoBehaviour {
   public TextAsset recordingAsset;
   public float recorderSpeed = 1.0f;
   public bool recorderLoop = true;
-  
+
   protected LeapRecorder recorder_ = new LeapRecorder();
   
   protected Controller leap_controller_;
@@ -73,6 +77,9 @@ public class HandController : MonoBehaviour {
   }
 
   void Start() {
+
+		pConf = GetComponent<PrintConfidence> ();
+
     // Initialize hand lookup tables.
     hand_graphics_ = new Dictionary<int, HandModel>();
     hand_physics_ = new Dictionary<int, HandModel>();
@@ -262,6 +269,8 @@ public class HandController : MonoBehaviour {
         hand_graphics_.Remove(hands[i]);
       }
     }
+
+		pConf.Print (frame.Hands [0].Confidence);
   }
 
   void FixedUpdate() {

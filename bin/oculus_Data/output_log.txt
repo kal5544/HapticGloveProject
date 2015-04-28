@@ -16,7 +16,7 @@ Platform assembly: C:\Users\Kevin\Documents\GitHub\HapticGloveProject\bin\oculus
 Loading C:\Users\Kevin\Documents\GitHub\HapticGloveProject\bin\oculus_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
 Platform assembly: C:\Users\Kevin\Documents\GitHub\HapticGloveProject\bin\oculus_Data\Managed\LeapCSharp.NET3.5.dll (this message is harmless)
 Loading C:\Users\Kevin\Documents\GitHub\HapticGloveProject\bin\oculus_Data\Managed\LeapCSharp.NET3.5.dll into Unity Child Domain
-- Completed reload, in  0.197 seconds
+- Completed reload, in  0.056 seconds
 <RI> Initializing input.
 <RI> Input initialized.
 desktop: 1366x768 59Hz; virtual: 1366x768 at 0,0

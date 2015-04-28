@@ -5,9 +5,9 @@ using System.Threading;
 
 public class PrintCollisions : MonoBehaviour {
 
-	//Setup parameters to connect to Arduino
-	public static SerialPort sp = new SerialPort("COM5", 9600, Parity.None, 8, StopBits.One);
-	public int motorPin;
+	//Setup parameters to connect to bluetooth chip
+	public static SerialPort sp = new SerialPort("COM8", 115200, Parity.None, 8, StopBits.One);
+	public int motorPin = 4;
 
 	private string debugString = "";
 
@@ -21,7 +21,7 @@ public class PrintCollisions : MonoBehaviour {
 	//Force to be sent to servo
 	private int force_servo = 0;
 	// maximum force from collisions
-	private int maxForce = 15;
+	private int maxForce = 2;
 	//(num range of motor)/(max force)
 	private float forceCoeff;
 
@@ -37,7 +37,7 @@ public class PrintCollisions : MonoBehaviour {
 	void OnCollisionEnter(Collision coll)
 	{
 		//Debug.Log ("modifying mesh");
-		meshEdited = GameObject.Find ("HandControllerSandBox").GetComponent<MeshFunctionality> ().ModifyMesh (coll);
+		meshEdited = GameObject.Find ("SandBox").GetComponent<MeshFunctionality> ().ModifyMesh (coll);
 		//if(!meshEdited)
 		//{
 			//motorOn [1] = (byte)255;
@@ -59,19 +59,22 @@ public class PrintCollisions : MonoBehaviour {
 
 	void OnCollisionStay(Collision coll)
 	{
-		forceMagnitude = Vector3.Dot(coll.contacts[0].normal, coll.relativeVelocity)*coll.rigidbody.mass;
+		if (coll.rigidbody != null) {
+			forceMagnitude = Vector3.Dot (coll.contacts [0].normal, coll.relativeVelocity) * coll.rigidbody.mass;
 	
-		Debug.Log ("raw force magnitude: " + forceMagnitude);
-		forceMagnitude = Mathf.Abs (forceMagnitude);
-		if (forceMagnitude > maxForce) {
-			forceMagnitude = maxForce;
+			//Debug.Log ("raw force magnitude: " + forceMagnitude);
+			forceMagnitude = Mathf.Abs (forceMagnitude);
+			if (forceMagnitude > maxForce) {
+				forceMagnitude = maxForce;
+			}
+			force_vib = (int)Mathf.Floor ((forceCoeff * forceMagnitude) + 100);
+			//debugString = gameObject.name + " in contact with " + coll.gameObject.name + " with force: " + forceMagnitude;
+			//Debug.Log (debugString);
+			//Debug.Log("force vibrating motor: " + force_vib);
+			motorOn [1] = (byte)force_vib;
+			sp.Write (motorOn, 0, 2);
+			//Debug.Log("motor pin: " + motorOn[0] + " magnitude: " + motorOn[1]);
 		}
-		force_vib = (int)Mathf.Floor ((forceCoeff * forceMagnitude)+100);
-		//debugString = gameObject.name + " in contact with " + coll.gameObject.name + " with force: " + forceMagnitude;
-		//Debug.Log (debugString);
-		Debug.Log("force vibrating motor: " + force_vib);
-		motorOn [1] = (byte)force_vib;
-		sp.Write (motorOn, 0, 2);
 	}
 
 	void OnDestroy()
@@ -86,35 +89,7 @@ public class PrintCollisions : MonoBehaviour {
 		if (!sp.IsOpen) {
 			sp.Open ();
 			//Debug.Log ("opening port");
-		}
-			/*
-		if (sp != null) 
-		{
-			if (sp.IsOpen) 
-			{
-				sp.Close();
-				Debug.Log("Closing port, because it was already open!");
-			}
-			else 
-			{
-				sp.Open();  // opens the connection
-				sp.ReadTimeout = 50;  // sets the timeout value before reporting error
-				Debug.Log("Port Opened!");
-			}
-		}
-		else 
-		{
-			if (sp.IsOpen)
-			{
-				Debug.Log("Port is already open");
-			}
-			else 
-			{
-				Debug.Log("Port == null");
-			}
-		}
-*/
+		} 
 	}
-
 
 }
