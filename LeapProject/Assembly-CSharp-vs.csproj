@@ -116,6 +116,7 @@
      <Compile Include="Assets\OVR\Scripts\Util\OVRScreenFade.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRUGUI.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRVisionGuide.cs" />
+     <Compile Include="Assets\OpenBluetooth.cs" />
      <Compile Include="Assets\PrintConfidence.cs" />
      <Compile Include="Assets\WanderAI.cs" />
      <None Include="Assets\LeapMotion\Resources\LeapIRUndistorted.shader" />

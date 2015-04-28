@@ -30,7 +30,7 @@ public class PrintCollisions : MonoBehaviour {
 		forceCoeff = 155 / maxForce;
 		//Debug.Log (motorPin);
 		motorOn = new byte[]{(byte)motorPin, 1};
-		OpenConnection ();
+		//OpenConnection ();
 		sp.ReadTimeout = 1;
 	}
 
@@ -49,12 +49,11 @@ public class PrintCollisions : MonoBehaviour {
 
 	void OnCollisionExit(Collision coll)
 	{
-		if (!meshEdited) {
+		//if (!meshEdited) {
 			motorOn [1] = (byte)0;
 			//Debug.Log ("Motor Pin: " + (int)motorOn [0] + ", Motor Magnitude: " + (int)motorOn [1]);
-			//sp.Write (motorOn, 0, 2);
-		}
-
+			sp.Write (motorOn, 0, 2);
+		//}
 	}
 
 	void OnCollisionStay(Collision coll)
@@ -76,6 +75,12 @@ public class PrintCollisions : MonoBehaviour {
 			//Debug.Log("motor pin: " + motorOn[0] + " magnitude: " + motorOn[1]);
 		}
 	}
+	
+	void OnApplicationQuit()
+	{
+		motorOn [1] = (byte)0;
+		sp.Write (motorOn, 0, 2);
+	}
 
 	void OnDestroy()
 	{
@@ -84,12 +89,16 @@ public class PrintCollisions : MonoBehaviour {
 	}
 
 	//Function connecting to Arduino
-	public void OpenConnection() 
+	public static void OpenConnection() 
 	{
 		if (!sp.IsOpen) {
 			sp.Open ();
 			//Debug.Log ("opening port");
 		} 
+	}
+	public static void CloseConnection()
+	{
+		sp.Close ();
 	}
 
 }
