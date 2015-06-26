@@ -48,8 +48,10 @@
   <ItemGroup>
      <Compile Include="Assets\DemoScenes\MeshFunctionality.cs" />
      <Compile Include="Assets\DemoScenes\ObjectCreator.cs" />
-     <Compile Include="Assets\DemoScenes\PrintCollisions.cs" />
+     <Compile Include="Assets\DemoScenes\PrintConfidence.cs" />
+     <Compile Include="Assets\DemoScenes\RegisterCollisions.cs" />
      <Compile Include="Assets\DemoScenes\SendData.cs" />
+     <Compile Include="Assets\DemoScenes\SendMotorData.cs" />
      <Compile Include="Assets\LeapMotion+OVR\DemoResources\Scripts\BlocksPlaneGenerator.cs" />
      <Compile Include="Assets\LeapMotion+OVR\DemoResources\Scripts\MovementManager.cs" />
      <Compile Include="Assets\LeapMotion+OVR\DemoResources\Scripts\RandomBlocksGenerator.cs" />
@@ -116,9 +118,6 @@
      <Compile Include="Assets\OVR\Scripts\Util\OVRScreenFade.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRUGUI.cs" />
      <Compile Include="Assets\OVR\Scripts\Util\OVRVisionGuide.cs" />
-     <Compile Include="Assets\OpenBluetooth.cs" />
-     <Compile Include="Assets\PrintConfidence.cs" />
-     <Compile Include="Assets\WanderAI.cs" />
      <None Include="Assets\LeapMotion\Resources\LeapIRUndistorted.shader" />
      <None Include="Assets\Plugins\donotdelete.txt" />
      <None Include="Assets\LeapMotion\Materials\Sources\Shaders\Toony-Basic.shader" />
@@ -135,7 +134,6 @@
      <None Include="Assets\LeapMotion\Materials\Sources\Shaders\Toony-BasicOutline.shader" />
      <None Include="Assets\LeapMotion\Materials\Sources\Shaders\Toony-LightedOutline.shader" />
      <None Include="Assets\LeapMotion\Materials\Sources\Shaders\Toony-Lighted.shader" />
-     <None Include="Assets\Raw Mocap Data\Animations\_CompleteAnimationList.txt" />
      <None Include="Assets\LeapMotion\CoreAssetVersion.txt" />
      <None Include="Assets\OVR\Shaders\OVRGUIShader.shader" />
      <None Include="Assets\Plugins\x86\donotdelete.txt" />
